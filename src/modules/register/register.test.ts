@@ -1,8 +1,8 @@
 import { request } from 'graphql-request';
 
-import { host } from './constants';
-import { User } from "../entity/User";
-import { GetDataSource } from '../utils/getDataSource';
+import { host } from '../../tests/constants';
+import { User } from "../../entity/User";
+import { GetDataSource } from '../../utils/getDataSource';
 
 beforeAll(async () => {
     await GetDataSource().initialize();
