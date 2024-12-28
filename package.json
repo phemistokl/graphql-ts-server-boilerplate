@@ -36,12 +36,12 @@
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "typeorm": "0.3.20",
-      "uuid": "^10.0.0"
+      "yup": "^1.6.1"
    },
    "scripts": {
       "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
       "test-server": "NODE_ENV=test ts-node src/index.ts",
-      "test": "NODE_ENV=test jest",
+      "test": "NODE_ENV=test jest --forceExit",
       "ci": "start-server-and-test test-server 'http-get://localhost:4000/graphql?query={ __schema { queryType { name } } }' test",
       "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts",
       "typeorm": "typeorm-ts-node-commonjs"
