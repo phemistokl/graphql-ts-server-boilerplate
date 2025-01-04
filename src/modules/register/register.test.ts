@@ -7,9 +7,9 @@ import { duplicateEmail, emailNotLongerEnough, invalidEmail, passwordNotLongEnou
 
 beforeAll(async () => {
     await GetDataSource().initialize();
-})
+});
 
-var email = "tom@bob.com";
+var email = `testethrth@example.com`;
 var password = "jalksa";
 
 const mutation = (e: string, p: string) => `
@@ -21,7 +21,8 @@ mutation {
 }
 `;
 
-test("Register user", async () => {
+describe("Register user", () => {
+  it("check for duplicate emails", async () => {
     const response  = await request(host, mutation(email, password));
     expect(response).toEqual({ register: null });
     const users = await User.find({ where: { email }});
@@ -36,9 +37,11 @@ test("Register user", async () => {
       path: "email",
       message: [duplicateEmail]
     });
+  });
 
-    const response3: any = await request(host, mutation("b", password));
-    expect(response3).toEqual({
+  it("check bad email", async () => {
+    const response: any = await request(host, mutation("b", password));
+    expect(response).toEqual({
       register: [
         {
           path: "email",
@@ -50,9 +53,11 @@ test("Register user", async () => {
         }
       ]
     });
+  });
 
-    const response4: any = await request(host, mutation(email, "fg"));
-    expect(response4).toEqual({
+  it("check bad password", async () => {
+    const response: any = await request(host, mutation(email, "fg"));
+    expect(response).toEqual({
       register: [
         {
           path: "password",
@@ -60,9 +65,11 @@ test("Register user", async () => {
         }
       ]
     });
+  });
 
-    const response5: any = await request(host, mutation("df", "fg"));
-    expect(response5).toEqual({
+  it("check bad password and bad email", async () => {
+    const response: any = await request(host, mutation("df", "fg"));
+    expect(response).toEqual({
       register: [
         {
           path: "email",
@@ -78,4 +85,5 @@ test("Register user", async () => {
         }
       ]
     });
+  });
 });
