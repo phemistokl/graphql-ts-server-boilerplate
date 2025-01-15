@@ -28,7 +28,7 @@ export const startServer = async () => {
 
   const server = express();
 
-  server.get("/confirm/:id", async (req: Request, res: Response) => {
+  server.get("/graphql/confirm/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const userId = await redis.get(id);
     if (userId) {
