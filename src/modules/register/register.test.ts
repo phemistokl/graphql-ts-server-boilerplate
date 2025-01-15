@@ -9,8 +9,14 @@ beforeAll(async () => {
     await GetDataSource().initialize();
 });
 
-var email = `testethrth@example.com`;
-var password = "jalksa";
+afterAll(async () => {
+  if (GetDataSource().isInitialized) {
+    await GetDataSource().destroy();
+  }
+});
+
+const email = `test_${Date.now()}@example.com`;
+const password = "jalkerferfsa";
 
 const mutation = (e: string, p: string) => `
 mutation {
