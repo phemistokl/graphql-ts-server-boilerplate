@@ -20,19 +20,25 @@ line: number;
 column: number;
 }
 
-interface IQuery {
-__typename: "Query";
-hello: string | null;
-}
-
 interface IMutation {
 __typename: "Mutation";
-register: boolean | null;
+register: Array<IError> | null;
 }
 
 interface IRegisterOnMutationArguments {
 email: string;
 password: string;
+}
+
+interface IError {
+__typename: "Error";
+path: string;
+message: Array<string | null>;
+}
+
+interface IQuery {
+__typename: "Query";
+hello: string | null;
 }
 }
 
