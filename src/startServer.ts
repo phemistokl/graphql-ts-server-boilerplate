@@ -7,6 +7,9 @@ const express = require("express");
 export const startServer = async () => {
   const server = express();
 
+  // Включаем trust proxy для корректной обработки заголовков
+  server.set('trust proxy', true);
+
   server.get("/graphql/confirm/:id", confirmEmail);
 
   server.use("/graphql", getYoga());
